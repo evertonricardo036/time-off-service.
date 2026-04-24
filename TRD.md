@@ -15,3 +15,8 @@ Create a microservice to manage time-off requests, ensuring data integrity betwe
 
 ## 4. Database Schema
 * **Balance**: employeeId, locationId, amount, lastSync.
+
+## 5. Implementation Notes & Reliability
+* **Idempotency**: The `sync` endpoint is designed to be idempotent. It uses a "find-or-create" logic to ensure that repeated calls with the same `employeeId` and `locationId` update the existing balance rather than creating duplicate entries.
+* **Testing Strategy**: Automated Unit Tests were implemented to validate the idempotency logic, ensuring the service remains reliable across environment changes.
+* **Architecture**: Follows NestJS best practices with a clear separation between Controllers (entry points) and Services (business logic).
